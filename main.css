@@ -1,0 +1,89 @@
+/* Base Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ecf0f1; /* Light grey background */
+    color: #2c3e50; /* Dark navy blue text */
+    padding-top: 0px;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #2c3e50 !important; /* Base color */
+    
+}
+
+.navbar a {
+    color: white !important;
+}
+
+.navbar a:hover {
+    color: #3498db !important; /* Accent color */
+}
+
+/* Headers */
+h2, h3 {
+    color: #2c3e50;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #3498db; /* Accent color */
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9; /* Slightly darker blue */
+}
+
+.btn-danger {
+    background-color: #e74c3c; /* Red for discard */
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+/* Form Styling */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Inputs */
+input, select {
+    border-radius: 5px !important;
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+}
+
+/* Success and Error Messages */
+.alert-success {
+    background-color: #2ecc71;
+    color: white;
+    text-align: center;
+}
+
+.alert-danger {
+    background-color: #e74c3c;
+    color: white;
+    text-align: center;
+}
+

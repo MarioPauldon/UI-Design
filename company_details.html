@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div style="text-align: center;">
+   <img src="{{ company.image }}" alt="{{ company.company }} Logo" width="350">
+</div>
+<h2>{{ company.company }} ({{ company.ticker }})</h2>
+<p><strong>Sector:</strong> {{ company.sector }}</p>
+<p><strong>Market Cap:</strong> {{ company.market_cap }}</p>
+<p><strong>Stock Price:</strong> {{ company.stock_price }}</p>
+<p><strong>Revenue:</strong> {{ company.revenue }}</p>
+<p><strong>P/E Ratio:</strong> {{ company.pe_ratio }}</p>
+<p><strong>Dividend Yield:</strong> {{ company.dividend_yield }}</p>
+
+{% if similar_companies %}
+<h3>Similar Companies</h3>
+<ul>
+    {% for comp in similar_companies %}
+        <li><a href="{{ url_for('company_page', company_id=comp.id) }}">{{ comp.company }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<!-- Edit Button (Not Very Salient) -->
+<a href="{{ url_for('edit_company', company_id=company.id) }}" class="btn btn-secondary btn-sm mt-3">Edit</a>
+
+{% endblock %}

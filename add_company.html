@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Add a New Company</h2>
+
+<!-- Success Message -->
+<div id="successMessage" class="alert alert-success" style="display: none;"></div>
+
+<!-- Error Message -->
+<div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+
+<!-- Company Input Form -->
+<form id="addCompanyForm" class="mt-4">
+    <div class="mb-3">
+        <label for="company" class="form-label">Company Name</label>
+        <input type="text" class="form-control" id="company" name="company" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="ticker" class="form-label">Ticker Symbol</label>
+        <input type="text" class="form-control" id="ticker" name="ticker" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="sector" class="form-label">Sector</label>
+        <input type="text" class="form-control" id="sector" name="sector" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="market_cap" class="form-label">Market Cap</label>
+        <input type="text" class="form-control" id="market_cap" name="market_cap" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="stock_price" class="form-label">Stock Price</label>
+        <input type="text" class="form-control" id="stock_price" name="stock_price" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="revenue" class="form-label">Revenue</label>
+        <input type="text" class="form-control" id="revenue" name="revenue" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="pe_ratio" class="form-label">P/E Ratio</label>
+        <input type="text" class="form-control" id="pe_ratio" name="pe_ratio" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="dividend_yield" class="form-label">Dividend Yield</label>
+        <input type="text" class="form-control" id="dividend_yield" name="dividend_yield" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="image" class="form-label">Image URL</label>
+        <input type="text" class="form-control" id="image" name="image" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Company</button>
+</form>
+
+<script>
+document.getElementById("addCompanyForm").addEventListener("submit", function(event) {
+    event.preventDefault();  // Prevent traditional form submission
+
+    let formData = {
+        company: document.getElementById("company").value.trim(),
+        ticker: document.getElementById("ticker").value.trim(),
+        sector: document.getElementById("sector").value.trim(),
+        market_cap: document.getElementById("market_cap").value.trim(),
+        stock_price: document.getElementById("stock_price").value.trim(),
+        revenue: document.getElementById("revenue").value.trim(),
+        pe_ratio: document.getElementById("pe_ratio").value.trim(),
+        dividend_yield: document.getElementById("dividend_yield").value.trim(),
+        image: document.getElementById("image").value.trim()
+    };
+
+    fetch("{{ url_for('add_company') }}", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById("successMessage").style.display = "block";
+            document.getElementById("successMessage").innerHTML = `${data.message} <a href="/view/${data.company_id}" class="btn btn-success btn-sm">See it here</a>`;
+
+            // Clear the form fields and set focus to the first input
+            document.getElementById("addCompanyForm").reset();
+            document.getElementById("company").focus();
+        } else {
+            document.getElementById("errorMessage").style.display = "block";
+            document.getElementById("errorMessage").innerHTML = data.message;
+        }
+    });
+});
+</script>
+{% endblock %}
